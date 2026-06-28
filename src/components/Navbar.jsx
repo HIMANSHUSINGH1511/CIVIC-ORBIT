@@ -1,7 +1,19 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  Megaphone,
+  FolderOpen,
+  Map,
+  Trophy,
+  ShieldCheck,
+  MapPin,
+  Gift,
+} from "lucide-react";
+
+import Dropdown from "./Dropdown";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,41 +52,80 @@ function Navbar() {
 
         {/* Desktop Menu */}
 
-        <ul className="hidden lg:flex items-center gap-5 text-white font-medium">
+<ul className="hidden lg:flex items-center gap-6 text-white font-medium">
 
-          <Link to="/"><li className="hover:text-cyan-400">Home</li></Link>
+  <Link to="/">
+    <li className="hover:text-cyan-400">Home</li>
+  </Link>
 
-          <Link to="/report"><li className="hover:text-cyan-400">Report</li></Link>
+  <li>
+    <Dropdown
+      title="Report"
+      items={[
+        {
+          name: "Report Issue",
+          link: "/report",
+          icon: <Megaphone size={18} />,
+        },
+        {
+          name: user?.role === "government"
+            ? "Government Dashboard"
+            : "My Complaints",
+          link: user?.role === "government"
+            ? "/gov-dashboard"
+            : "/citizen-dashboard",
+          icon: <FolderOpen size={18} />,
+        },
+        {
+          name: "Smart Map",
+          link: "/map",
+          icon: <Map size={18} />,
+        },
+      ]}
+    />
+  </li>
 
-          {user?.role === "government" ? (
-            <Link to="/gov-dashboard">
-              <li className="hover:text-cyan-400">Government</li>
-            </Link>
-          ) : (
-            <Link to="/citizen-dashboard">
-              <li className="hover:text-cyan-400">My Complaints</li>
-            </Link>
-          )}
+  <li>
+    <Dropdown
+      title="Rankings"
+      items={[
+        {
+          name: "Leaderboard",
+          link: "/leaderboard",
+          icon: <Trophy size={18} />,
+        },
+        {
+          name: "Trust Scores",
+          link: "/trust-scores",
+          icon: <ShieldCheck size={18} />,
+        },
+        {
+          name: "Area Ranking",
+          link: "/area-ranking",
+          icon: <MapPin size={18} />,
+        },
+        {
+          name: "Rewards",
+          link: "/rewards",
+          icon: <Gift size={18} />,
+        },
+      ]}
+    />
+  </li>
 
-          <Link to="/map"><li className="hover:text-cyan-400">Smart Map</li></Link>
+  <Link to="/donation-analytics">
+    <li className="hover:text-cyan-400">
+      Donations
+    </li>
+  </Link>
 
-          <Link to="/leaderboard"><li className="hover:text-cyan-400">Leaderboard</li></Link>
+  <Link to="/about">
+    <li className="hover:text-cyan-400">
+      About
+    </li>
+  </Link>
 
-          <Link to="/trust-scores"><li className="hover:text-cyan-400">Trust Scores</li></Link>
-
-          <Link to="/area-ranking"><li className="hover:text-cyan-400">Area Ranking</li></Link>
-
-          <Link to="/rewards"><li className="hover:text-cyan-400">Rewards</li></Link>
-
-          <Link to="/donation-analytics">
-            <li className="hover:text-cyan-400">Donations</li>
-          </Link>
-
-          <Link to="/about">
-            <li className="hover:text-cyan-400">About</li>
-          </Link>
-
-        </ul>
+</ul>
 
         {/* Right */}
 
