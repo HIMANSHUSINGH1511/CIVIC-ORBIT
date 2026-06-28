@@ -28,17 +28,17 @@ function StatsCards({
   ];
 
   return (
-    <div className="space-y-4 max-w-[260px]">
+    <div className="w-full max-w-sm mx-auto space-y-4">
       {stats.map((item, index) => (
         <div
           key={index}
-          className="bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-2xl p-5"
+          className="bg-white/5 backdrop-blur-xl border border-cyan-500/20 rounded-2xl p-5 hover:border-cyan-400 hover:scale-[1.02] transition duration-300"
         >
-          <h3 className="text-gray-400 text-sm">
+          <h3 className="text-gray-400 text-sm sm:text-base">
             {item.title}
           </h3>
 
-          <p className="text-white text-2xl font-bold mt-2">
+          <p className="text-white text-2xl sm:text-3xl font-bold mt-2 break-words">
             {item.value}
           </p>
 
